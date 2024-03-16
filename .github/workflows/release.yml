@@ -69,12 +69,12 @@ jobs:
       if: ${{ steps.cache.output.cache-hit != 'true' }}
       run: |
         cd ..
-        git clone https://github.com/google/googletest.git --branch release-1.14.0
+        git clone https://github.com/google/googletest.git --branch v1.14.0
         cd googletest
         cmake -Bbuild -DCMAKE_INSTALL_PREFIX="$HOME/.local" -Dgtest_force_shared_crt=1
         cmake --build build --config Release
         cmake --build build --target install --config Release
-        cd ../modern-cpp-template
+        cd ../${{ github.event.repository.name }}
 
     - name: configure
       run: cmake -Bbuild -DCMAKE_INSTALL_PREFIX="$HOME/.local"
